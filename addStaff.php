@@ -49,12 +49,12 @@
             $firstname = $_POST['firstname'];
             $doe = $_POST['doe'];
             $gender = $_POST['gender'];
-            $section = $_POST['dept'];
+            $dept = $_POST['dept'];
             $gl = $_POST['gl'];
 
             // fetch Teachers
             $sql = "INSERT INTO staffs (surname, midname, firstname, doe, gender, dept, GL)
-            VALUES ('$surname', '$midname', '$firstname', '$doe', '$gender', '$section', '$gl')";
+            VALUES ('$surname', '$midname', '$firstname', '$doe', '$gender', '$dept', '$gl')";
             
             if ($conn->query($sql) === TRUE) {
                 $success = 1;
@@ -118,7 +118,31 @@
                     <div class="col-sm-10">
                         <select class="form-control" name="dept">
                             <?php 
-                            
+                                $servername = "localhost";
+                                $username = "root";
+                                $password = "";
+                                $db = "school";
+                
+                                // Create connection
+                                $conn = mysqli_connect($servername, $username, $password, $db);
+                
+                                // Check connection
+                                if (!$conn) {
+                                    die("Connection failed: " . mysqli_connect_error());
+                                }
+
+                                $sql = "SELECT * FROM depts";
+                                $result = $conn->query($sql);
+
+                                if($result->num_rows > 0){
+                                    
+                                    while($row = $result->fetch_assoc()) {
+                                        echo "<option value=".$row['name'].">" .$row["name"]. "</option>";
+                                    }
+
+                                }
+                                
+                                $conn->close();
                             ?>
                         </select>
                     </div>
