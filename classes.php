@@ -15,10 +15,10 @@
     <div class="container">
         <ol class="breadcrumb">
             <li><a href="index.php">Home</a></li>
-            <li class="active">Teachers List</li>
+            <li class="active">Classes List</li>
         </ol>
         <div class="jumbotron">
-            <h3 class="cat-head text-info">Teachers Information <a href="addTeacher.php" class="btn btn-success pull-right">Add Teacher</a></h3>
+            <h3 class="cat-head text-info">Class Information <a href="addClass.php" class="btn btn-success pull-right">Add Class</a></h3>
             <!-- Connection to Mysql DB -->
             <?php 
                 $servername = "localhost";
@@ -33,21 +33,19 @@
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
                 }
-                // fetch Teachers
-                $sql = "SELECT teacher.staff, teacher.section, staffs.surname, staffs.midname, staffs.firstname, staffs.doe, staffs.gender, staffs.dept, staffs.GL FROM teacher JOIN staffs ON teacher.staff=staffs.id WHERE dept='teaching'";
-                // $result = $conn->query($sql);
-                $result = mysqli_query($conn, $sql) or die("Error: ".mysqli_error($conn));
+                // fetch Classes
+                $sql = "SELECT * FROM classes";
+                $result = $conn->query($sql);
 
                 if($result->num_rows > 0){
-                    echo '<table class="table"><tr><th>Surname Name</th><th>First Name</th><th>Middle Name</th><th>Date of Employment</th><th>Gender</th><th>Section</th><th>Grade Level</th></tr>';
-                    while($row = mysqli_fetch_array($result)) {
-                        echo "<tr>
-                            <td>" .$row['surname']. "</td><td>" .$row['firstname']. "</td><td>" .$row['midname']. "</td><td>" .$row['doe']. "</td><td>" .$row['gender']. "</td><td>" .$row['section']. "</td><td>" .$row['GL']. "</td></tr>";
+                    echo '<table class="table"><tr><th>Class Name</th><th>Class Teacher</th></tr>';
+                    while($row = $result->fetch_assoc()) {
+                        echo "<tr><td>" .$row["className"]. "</td><td>" .$row["classTeacher"]. "</td></tr>";
                     }
                    
                     echo '</table>';
                 }else{
-                    echo '<button class="btn btn-danger pull-right">No Teacher exist</button>';
+                    echo '<button class="btn btn-danger pull-right">No Class exist</button>';
                 }
 
             ?>
