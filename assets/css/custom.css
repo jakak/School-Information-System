@@ -1,0 +1,31 @@
+body{
+    background: brown;
+}
+
+.border{
+    border: 1px solid blue;
+}
+
+.fullwidth{
+    width: 100%;
+}
+
+.cat{
+    margin-bottom: 10px;
+}
+
+.empty{
+    margin-top: 2em;
+}
+
+.jumbotron{
+    padding-top: 0.5em;
+}
+
+.cat-head{
+    margin-bottom: 2em;
+}
+
+.radio{
+    margin-left: 20px;
+}
